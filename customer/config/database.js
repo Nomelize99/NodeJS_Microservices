@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const {MONGO_URI} = process.env || 'mongodb://mongo:27017/Customer'
+const {CUSTOMER_URI} = process.env || 'mongodb://mongo:27017/Customer'
 
 exports.connect = () => {
     mongoose.connect(MONGO_URI ,{
@@ -8,7 +8,7 @@ exports.connect = () => {
         useUnifiedTopology: true
     })
     .then(() => {
-    console.log("Connect to database Customer")
+    console.log(`Connect to database Customer ${CUSTOMER_URI}`)
     })
     .catch((err) => {
         console.log("Cannot Connect to database Customer")
