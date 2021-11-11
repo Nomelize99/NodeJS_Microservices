@@ -1,18 +1,16 @@
 const mongoose = require("mongoose");
-const {CUSTOMER_URI} = process.env;
+const {ORDER_URI} = process.env
 
 exports.connect = () => {
-    mongoose.connect(CUSTOMER_URI ,
-    {
+    mongoose.connect(ORDER_URI ,{
         useNewUrlParser: true,
         useUnifiedTopology: true
-        
     })
     .then(() => {
-    console.log(`Connect to database Customer ${CUSTOMER_URI}`)
+    console.log(`Connect to database Order ${ORDER_URI}`)
     })
     .catch((err) => {
-        console.log(`Cannot Connect to database ${CUSTOMER_URI}`)
+        console.log(`Cannot Connect to database ${ORDER_URI}`)
         console.log(err);
         process.exit(1)
     })} 

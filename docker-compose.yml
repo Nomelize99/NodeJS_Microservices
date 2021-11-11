@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  customer:
+    container_name: customer
+    restart: always
+    build: ./customer
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/Customer
+    depends_on:
+      - mongo
+  product:
+    container_name: product
+    restart: always
+    build: ./product
+    ports:
+      - "4000:4000"
+    links:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/Product
+    depends_on:
+      - mongo
+  order:
+    container_name: order
+    restart: always
+    build: ./order
+    ports:
+      - "5000:5000"
+    links:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/Order
+    depends_on:
+      - mongo
+      - customer
+      - product
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - data-db:/data/db
+volumes:
+  data-db:
